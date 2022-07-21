@@ -3,7 +3,7 @@
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 // import HelloWorld from './components/HelloWorld.vue'
 
-import { ref, onMounted } from 'vue'
+import { ref, watch } from 'vue'
 import { Location } from '@element-plus/icons-vue'
 import { useRoute } from 'vue-router'
 import { TabPanelName } from 'element-plus'
@@ -63,11 +63,9 @@ const menuItem = (key: any) => {
   }
 }
 
-onMounted(() => {
-  setTimeout(function () {
-    // 刷新页面时，选中标签页
-    menuItem({ index: route.path })
-  }, 100)
+watch(() => route.path, (newValue, oldValue) => {
+  // 刷新页面时（路由真正加载完成时），选中标签页
+  menuItem({ index: route.path })
 })
 
 // 移除标签页
