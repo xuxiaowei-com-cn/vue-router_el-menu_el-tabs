@@ -47,7 +47,13 @@
                          :closable="item.closable"></el-tab-pane>
           </el-tabs>
 
-          <router-view/>
+          <!-- <router-view/> -->
+          <router-view v-slot="{ Component }">
+            <keep-alive>
+              <component :is="Component" :key="$route.name" v-if="$route.meta.keepAlive" />
+            </keep-alive>
+            <component :is="Component" :key="$route.name" v-if="!$route.meta.keepAlive" />
+          </router-view>
         </el-main>
         <el-footer id="cloud-el-footer">
           Footer

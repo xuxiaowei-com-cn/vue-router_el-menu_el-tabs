@@ -17,6 +17,9 @@ export const routes: Array<RouteRecordRaw> = [
       {
         path: '/console',
         name: 'Console',
+        meta: {
+          keepAlive: true
+        },
         component: ConsoleView
       }
     ]
