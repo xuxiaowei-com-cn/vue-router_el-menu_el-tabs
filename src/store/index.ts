@@ -1,36 +1,36 @@
-import { createStore } from 'vuex'
-import createPersistedState from 'vuex-persistedstate'
+import { defineStore } from 'pinia'
 
-export default createStore({
-  state: {
-    isCollapse: false // 是否折叠菜单
+export const useStore = defineStore({
+  id: 'store',
+  // @ts-ignore
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        key: 'xxx', // 秘钥
+        storage: localStorage // 存储方式，默认：sessionStorage，可选：localStorage
+      }
+    ]
   },
+  state: () => ({
+    isCollapse: false // 是否折叠菜单
+  }),
   getters: {
     /**
      * 是否折叠菜单
      * @param state
      */
-    isCollapse (state) {
+    collapse (state) {
       return state.isCollapse
     }
   },
-  mutations: {
+  actions: {
     /**
      * 设置是否折叠菜单
-     * @param state 单一状态树
      * @param isCollapse 是否折叠菜单
      */
-    setIsCollapse (state, isCollapse) {
-      state.isCollapse = isCollapse
+    setIsCollapse (isCollapse: boolean) {
+      this.isCollapse = isCollapse
     }
-  },
-  actions: {
-  },
-  modules: {
-  },
-  plugins: [
-    createPersistedState({
-      storage: localStorage
-    })
-  ]
+  }
 })

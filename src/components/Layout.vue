@@ -69,18 +69,20 @@ import { Location, Document, Expand, Fold } from '@element-plus/icons-vue'
 import { useRoute, useRouter } from 'vue-router'
 import { TabPanelName } from 'element-plus'
 import { routes } from '../router'
-import store from '../store'
+import { useStore } from '../store'
 
 const route = useRoute()
 const router = useRouter()
 
+const store = useStore()
+
 // 左侧菜单是否折叠
-const isCollapse = ref(store.getters.isCollapse)
+const isCollapse = ref(store.collapse)
 
 // 是否折叠菜单
 const isCollapseClick = () => {
   isCollapse.value = !isCollapse.value
-  store.commit('setIsCollapse', isCollapse)
+  store.setIsCollapse(isCollapse.value)
 }
 
 // 展开指定的 sub-menu

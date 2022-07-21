@@ -12,10 +12,10 @@
   "dependencies": {
     "@element-plus/icons-vue": "2.0.6",
     "element-plus": "2.2.9",
+    "pinia": "2.0.16",
+    "pinia-plugin-persist": "1.0.0",
     "vue": "3.2.37",
-    "vue-router": "4.1.2",
-    "vuex": "4.0.2",
-    "vuex-persistedstate": "4.1.0"
+    "vue-router": "4.1.2"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "5.30.7",
