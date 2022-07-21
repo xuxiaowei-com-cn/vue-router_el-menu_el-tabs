@@ -39,7 +39,7 @@
           </el-button>
 
         </el-header>
-        <el-main>
+        <el-main id="cloud-el-main">
 
           <el-tabs v-model="editableTabsValue" type="card" class="demo-tabs" @tab-remove="removeTab"
                    @tab-change="changeTab">
@@ -49,7 +49,7 @@
 
           <router-view/>
         </el-main>
-        <el-footer>
+        <el-footer id="cloud-el-footer">
           Footer
         </el-footer>
       </el-container>
@@ -178,4 +178,28 @@ const changeTab = (name: TabPanelName) => {
   --el-header-height: 50px;
   line-height: var(--el-header-height);
 }
+
+/*14寸*/
+@media screen and (min-height: 600px) {
+  /* 中间主要内容 */
+  #cloud-el-main {
+    /*最小高度*/
+    min-height: 580px;
+  }
+}
+
+/*15.6寸*/
+@media screen and (min-height: 900px) {
+  /* 中间主要内容 */
+  #cloud-el-main {
+    /*最小高度*/
+    min-height: 800px;
+  }
+}
+
+/* 底部内容 */
+#cloud-el-footer {
+  text-align: center;
+}
+
 </style>
