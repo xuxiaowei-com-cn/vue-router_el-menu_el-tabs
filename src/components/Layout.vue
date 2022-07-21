@@ -165,6 +165,9 @@ const removeTab = (targetName: string) => {
 
   // 移除标签页时，改变URL
   location.hash = activeName
+
+  // 添加待销毁的组件路径
+  store.addDestroyPath(targetName)
 }
 
 // activeName 改变时触发
