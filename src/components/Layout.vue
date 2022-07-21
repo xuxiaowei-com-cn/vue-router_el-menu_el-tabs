@@ -1,9 +1,8 @@
 <template>
   <div class="common-layout">
     <el-container>
-      <el-aside width="200px">
-        <el-menu :default-active="route.path" class="el-menu-vertical-demo" :collapse="isCollapse" @open="handleOpen"
-                 @close="handleClose" router>
+      <el-aside id="cloud-el-aside">
+        <el-menu :default-active="route.path" :collapse="isCollapse" @open="handleOpen" @close="handleClose" router>
           <el-sub-menu index="1">
             <template #title>
               <el-icon>
@@ -25,12 +24,19 @@
         </el-menu>
       </el-aside>
       <el-container>
-        <el-header height="100px">
+        <el-header id="cloud-el-header">
 
-          <el-radio-group v-model="isCollapse" style="margin-bottom: 20px">
-            <el-radio-button :label="false">expand</el-radio-button>
-            <el-radio-button :label="true">collapse</el-radio-button>
-          </el-radio-group>
+          <!-- 左侧菜单打开/关闭按钮 -->
+          <el-button v-if="isCollapse" @click="isCollapseClick">
+            <el-icon>
+              <expand/>
+            </el-icon>
+          </el-button>
+          <el-button v-else @click="isCollapseClick">
+            <el-icon>
+              <fold/>
+            </el-icon>
+          </el-button>
 
         </el-header>
         <el-main>
@@ -53,16 +59,23 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { Location, Document } from '@element-plus/icons-vue'
+import { Location, Document, Expand, Fold } from '@element-plus/icons-vue'
 import { useRoute, useRouter } from 'vue-router'
 import { TabPanelName } from 'element-plus'
 import { routes } from '../router'
+import store from '../store'
 
 const route = useRoute()
 const router = useRouter()
 
 // 左侧菜单是否折叠
-const isCollapse = ref(false)
+const isCollapse = ref(store.getters.isCollapse)
+
+// 是否折叠菜单
+const isCollapseClick = () => {
+  isCollapse.value = !isCollapse.value
+  store.commit('setIsCollapse', isCollapse)
+}
 
 // 展开指定的 sub-menu
 const handleOpen = (key: string, keyPath: string[]) => {
@@ -154,8 +167,15 @@ const changeTab = (name: TabPanelName) => {
 </script>
 
 <style scoped>
-.el-menu-vertical-demo:not(.el-menu--collapse) {
-  width: 200px;
-  min-height: 400px;
+/* 左侧菜单 */
+#cloud-el-aside {
+  /* 最侧边框无宽度（内部填充） */
+  --el-aside-width: none;
+}
+
+/* 顶部导航 */
+#cloud-el-header {
+  --el-header-height: 50px;
+  line-height: var(--el-header-height);
 }
 </style>
