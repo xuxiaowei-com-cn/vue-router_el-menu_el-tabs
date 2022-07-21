@@ -17,5 +17,7 @@ module.exports = {
     '@typescript-eslint'
   ],
   rules: {
+    // 多个单词名称
+    'vue/multi-word-component-names': 0
   }
 }

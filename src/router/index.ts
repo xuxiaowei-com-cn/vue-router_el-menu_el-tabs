@@ -1,11 +1,25 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import Layout from '../components/Layout.vue'
 import HomeView from '../views/HomeView.vue'
+import ConsoleView from '../views/ConsoleView.vue'
 
 export const routes: Array<RouteRecordRaw> = [
   {
+    name: 'Layout',
     path: '/',
-    name: 'Home',
-    component: HomeView
+    component: Layout,
+    children: [
+      {
+        path: '/',
+        name: 'Home',
+        component: HomeView
+      },
+      {
+        path: '/console',
+        name: 'Console',
+        component: ConsoleView
+      }
+    ]
   },
   {
     path: '/about',
