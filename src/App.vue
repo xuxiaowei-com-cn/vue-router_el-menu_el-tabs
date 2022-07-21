@@ -5,11 +5,12 @@
 
 import { ref, watch } from 'vue'
 import { Location } from '@element-plus/icons-vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { TabPanelName } from 'element-plus'
 import { routes } from './router'
 
 const route = useRoute()
+const router = useRouter()
 
 // 左侧菜单是否折叠
 const isCollapse = ref(false)
@@ -64,7 +65,12 @@ const menuItem = (key: any) => {
 }
 
 watch(() => route.path, (newValue, oldValue) => {
-  // 刷新页面时（路由真正加载完成时），选中标签页
+  // 方法一：刷新页面时（路由真正加载完成时），选中标签页
+  // menuItem({ index: route.path })
+})
+
+router.isReady().then(() => {
+  // 方法二：刷新页面时（路由真正加载完成时），选中标签页
   menuItem({ index: route.path })
 })
 
