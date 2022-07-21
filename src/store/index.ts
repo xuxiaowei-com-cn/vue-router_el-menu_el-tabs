@@ -13,7 +13,8 @@ export const useStore = defineStore({
     ]
   },
   state: () => ({
-    isCollapse: false // 是否折叠菜单
+    isCollapse: false, // 是否折叠菜单
+    keepAliveExclude: []
   }),
   getters: {
     /**
@@ -31,6 +32,20 @@ export const useStore = defineStore({
      */
     setIsCollapse (isCollapse: boolean) {
       this.isCollapse = isCollapse
+    },
+    /**
+     * 添加 keep-alive 排除
+     * @param keepAliveExclude
+     */
+    addKeepAliveExclude (keepAliveExclude: string) {
+      this.keepAliveExclude.push(keepAliveExclude)
+    },
+    /**
+     * 移除 keep-alive 排除
+     * @param keepAliveExclude
+     */
+    removeKeepAliveExclude (keepAliveExclude: string) {
+      this.keepAliveExclude.splice(this.keepAliveExclude.indexOf(keepAliveExclude), 1)
     }
   }
 })

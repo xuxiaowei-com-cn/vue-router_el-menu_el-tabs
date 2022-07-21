@@ -49,7 +49,7 @@
 
           <!-- <router-view/> -->
           <router-view v-slot="{ Component }">
-            <keep-alive>
+            <keep-alive :exclude="store.keepAliveExclude">
               <component :is="Component" :key="$route.name" v-if="$route.meta.keepAlive" />
             </keep-alive>
             <component :is="Component" :key="$route.name" v-if="!$route.meta.keepAlive" />
@@ -165,6 +165,17 @@ const removeTab = (targetName: string) => {
 
   // 移除标签页时，改变URL
   location.hash = activeName
+
+  for (const i in routes) {
+    for (const j in routes[i].children) {
+      // @ts-ignore
+      if (routes[i].children[j].path === targetName) {
+        // 使用 el-tabs 的 @tab-remove 删除 el-tab-pane，需要销毁
+        // @ts-ignore
+        store.addKeepAliveExclude(routes[i].children[j].component.__name)
+      }
+    }
+  }
 }
 
 // activeName 改变时触发
