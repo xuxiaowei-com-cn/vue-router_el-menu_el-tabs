@@ -78,7 +78,6 @@ import { ref, watch } from 'vue'
 import { Location, Document, Expand, Fold } from '@element-plus/icons-vue'
 import { useRoute, useRouter } from 'vue-router'
 import { TabPanelName } from 'element-plus'
-import { routes } from '../router'
 import { useStore } from '../store'
 
 const route = useRoute()
@@ -132,17 +131,17 @@ const menuItem = (key: any) => {
   }
 
   // 标签页不存在时，添加标签页
-  for (const i in routes) {
-    for (const j in routes[i].children) {
-      // @ts-ignore
-      if (routes[i].children[j].path === key.index) {
-        editableTabs.value.push({
-          // @ts-ignore
-          title: routes[i].children[j].name,
-          name: key.index,
-          closable: true
-        })
-      }
+  const routeRecords = router.getRoutes()
+  for (const i in routeRecords) {
+    const routeRecord = routeRecords[i]
+    const name = routeRecord.name
+    const path = routeRecord.path
+    if (path === key.index) {
+      editableTabs.value.push({
+        title: name === undefined ? '未知标签页名称' : name.toString(),
+        name: key.index,
+        closable: true // 可关闭标签页
+      })
     }
   }
 }
@@ -176,13 +175,17 @@ const removeTab = (targetName: string) => {
   // 移除标签页时，改变URL
   location.hash = activeName
 
-  for (const i in routes) {
-    for (const j in routes[i].children) {
-      // @ts-ignore
-      if (routes[i].children[j].path === targetName) {
-        // 使用 el-tabs 的 @tab-remove 删除 el-tab-pane，需要销毁
-        // @ts-ignore
-        store.addKeepAliveExclude(routes[i].children[j].component.__name)
+  const routeRecords = router.getRoutes()
+  for (const i in routeRecords) {
+    const routeRecord = routeRecords[i]
+    if (routeRecord.path === targetName) {
+      const components = routeRecord.components
+      if (components) {
+        if (components.default) {
+          // 使用 el-tabs 的 @tab-remove 删除 el-tab-pane，需要销毁
+          // @ts-ignore
+          store.addKeepAliveExclude(components.default.__name)
+        }
       }
     }
   }

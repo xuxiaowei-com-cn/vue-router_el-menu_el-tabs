@@ -56,13 +56,8 @@ export const routes: Array<RouteRecordRaw> = [
   }
 ]
 
-export const router = createRouter({
+export default createRouter({
   // history: createWebHistory(),
   history: createWebHashHistory(),
   routes
 })
-
-export default {
-  router,
-  routes
-}
