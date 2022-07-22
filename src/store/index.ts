@@ -1,3 +1,4 @@
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useStore = defineStore({
@@ -14,7 +15,7 @@ export const useStore = defineStore({
   },
   state: () => ({
     isCollapse: false, // 是否折叠菜单
-    keepAliveExclude: []
+    keepAliveExclude: ref<string[]>([]) // keep-alive 排除页面（组件）名
   }),
   getters: {
     /**
