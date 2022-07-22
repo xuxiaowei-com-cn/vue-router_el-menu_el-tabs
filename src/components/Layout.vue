@@ -13,6 +13,16 @@
             <el-menu-item index="/" @click="menuItem">Home</el-menu-item>
             <el-menu-item index="/console" @click="menuItem">Console</el-menu-item>
           </el-sub-menu>
+          <el-sub-menu index="2">
+            <template #title>
+              <el-icon>
+                <location/>
+              </el-icon>
+              <span>Navigator - 2</span>
+            </template>
+            <el-menu-item index="/Navigator_2_1" @click="menuItem">Navigator_2_1</el-menu-item>
+            <el-menu-item index="/Navigator_2_2" @click="menuItem">Navigator_2_2</el-menu-item>
+          </el-sub-menu>
           <el-menu-item index="/about" target="_blank" @click="menuItem">
             <template #title>
               <el-icon>

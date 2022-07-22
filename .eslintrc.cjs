@@ -18,6 +18,8 @@ module.exports = {
   ],
   rules: {
     // 多个单词名称
-    'vue/multi-word-component-names': 0
+    'vue/multi-word-component-names': 0,
+    // 骆驼拼写法
+    camelcase: 0
   }
 }
