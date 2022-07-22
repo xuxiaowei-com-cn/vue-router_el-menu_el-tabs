@@ -7,7 +7,7 @@ import NavigatorView_2_2 from '../views/NavigatorView_2_2.vue'
 
 export const routes: Array<RouteRecordRaw> = [
   {
-    name: 'Layout',
+    name: 'Navigator',
     path: '/',
     component: Layout,
     children: [
