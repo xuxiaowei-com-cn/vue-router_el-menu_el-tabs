@@ -2,43 +2,25 @@
   <div class="common-layout">
     <el-container>
       <el-aside id="cloud-el-aside">
-        <el-menu :default-active="route.path" :collapse="isCollapse" @open="handleOpen" @close="handleClose" router>
-          <el-sub-menu index="1">
-            <template #title>
-              <el-icon>
-                <location/>
-              </el-icon>
-              <span>Navigator</span>
-            </template>
-            <el-menu-item index="/" @click="menuItem">Home</el-menu-item>
-            <el-menu-item index="/console" @click="menuItem">Console</el-menu-item>
-          </el-sub-menu>
-          <el-sub-menu index="2">
-            <template #title>
-              <el-icon>
-                <location/>
-              </el-icon>
-              <span>Navigator - 2</span>
-            </template>
-            <el-menu-item index="/Navigator_2_1" @click="menuItem">Navigator_2_1</el-menu-item>
-            <el-menu-item index="/Navigator_2_2" @click="menuItem">Navigator_2_2</el-menu-item>
-          </el-sub-menu>
-          <el-menu-item index="/Navigator_3" @click="menuItem">
-            <template #title>
-              <el-icon>
-                <Document/>
-              </el-icon>
-              <span>Navigator - 3</span>
-            </template>
-          </el-menu-item>
-          <el-menu-item index="/about" @click="menuItem">
-            <template #title>
-              <el-icon>
-                <Document/>
-              </el-icon>
-              <span>About</span>
-            </template>
-          </el-menu-item>
+        <el-menu class="cloud-el-menu" :default-active="route.path" :collapse="isCollapse" @open="handleOpen" @close="handleClose" router>
+          <!-- 使用 template 用于遍历 -->
+          <template v-for="(item, i) in routes">
+            <!-- 有二级菜单，且二级菜单的个数大于 1 -->
+            <!-- 有多个（大于 1）二级菜单时，index 无意义，只要唯一就行 -->
+            <el-sub-menu :index=" i + ''" v-if="childrenLength(item.children) > 1">
+              <template #title>
+                <span>{{item.name}}</span>
+              </template>
+              <el-menu-item v-for="children in item.children" :index="children.path" @click="menuItem">{{children.name}}</el-menu-item>
+            </el-sub-menu>
+
+            <!-- 无二级菜单，或二级菜单的个数小于等于 1 -->
+            <el-menu-item :index="menuItemPath(item)" v-if="childrenLength(item.children) <= 1" @click="menuItem">
+              <template #title>
+                <span>{{item.name}}</span>
+              </template>
+            </el-menu-item>
+          </template>
         </el-menu>
       </el-aside>
       <el-container>
@@ -87,9 +69,27 @@ import { Location, Document, Expand, Fold } from '@element-plus/icons-vue'
 import { useRoute, useRouter } from 'vue-router'
 import { TabPanelName } from 'element-plus'
 import { useStore } from '../store'
+import { routes } from '../router'
 
 const route = useRoute()
 const router = useRouter()
+
+const childrenLength = (children: any) => {
+  if (children == null) {
+    return 0
+  } else {
+    return children.length
+  }
+}
+
+const menuItemPath = (item: any) => {
+  if (item.children == null) {
+    return item.path
+  } else {
+    return item.children[0].path
+  }
+}
+
 
 const store = useStore()
 
@@ -207,6 +207,15 @@ const changeTab = (name: TabPanelName) => {
 </script>
 
 <style scoped>
+
+.cloud-el-menu:not(.el-menu--collapse) {
+  width: 200px;
+}
+
+.cloud-el-menu {
+  min-height: 100%;
+}
+
 /* 左侧菜单 */
 #cloud-el-aside {
   /* 最侧边框无宽度（内部填充） */
