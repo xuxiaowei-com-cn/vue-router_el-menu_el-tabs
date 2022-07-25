@@ -44,6 +44,18 @@ export const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
+    name: 'NavigatorView - 3',
+    path: '/Navigator_3',
+    redirect: "Navigator_3",
+    children: [
+      {
+        path: '/Navigator_3',
+        name: 'Navigator_3',
+        component: () => import('../views/NavigatorView_3.vue')
+      }
+    ]
+  },
+  {
     path: '/about',
     name: 'About',
     // route level code-splitting
