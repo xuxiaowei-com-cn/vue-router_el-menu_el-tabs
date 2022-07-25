@@ -60,6 +60,9 @@ export const routes: Array<RouteRecordRaw> = [
       {
         path: '/Navigator_3',
         name: 'Navigator_3',
+        meta: {
+          target: '_blank'
+        },
         component: () => import('../views/NavigatorView_3.vue')
       }
     ]
