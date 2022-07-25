@@ -23,7 +23,7 @@
             <el-menu-item index="/Navigator_2_1" @click="menuItem">Navigator_2_1</el-menu-item>
             <el-menu-item index="/Navigator_2_2" @click="menuItem">Navigator_2_2</el-menu-item>
           </el-sub-menu>
-          <el-menu-item index="/Navigator_3" target="_blank" @click="menuItem">
+          <el-menu-item index="/Navigator_3" @click="menuItem">
             <template #title>
               <el-icon>
                 <Document/>
@@ -31,7 +31,7 @@
               <span>Navigator - 3</span>
             </template>
           </el-menu-item>
-          <el-menu-item index="/about" target="_blank" @click="menuItem">
+          <el-menu-item index="/about" @click="menuItem">
             <template #title>
               <el-icon>
                 <Document/>
