@@ -7,6 +7,9 @@ export const routes: Array<RouteRecordRaw> = [
     name: 'Navigator - 1',
     path: '',
     component: Layout,
+    meta: {
+      icon: 'Document'
+    },
     children: [
       {
         path: '/',
@@ -27,6 +30,9 @@ export const routes: Array<RouteRecordRaw> = [
     name: 'Navigator - 2',
     path: '',
     component: Layout,
+    meta: {
+      icon: 'Chicken'
+    },
     children: [
       {
         path: '/Navigator_2_1',
@@ -47,6 +53,9 @@ export const routes: Array<RouteRecordRaw> = [
     name: 'Navigator - 3',
     path: '',
     component: Layout,
+    meta: {
+      icon: 'Burger'
+    },
     children: [
       {
         path: '/Navigator_3',
@@ -58,6 +67,9 @@ export const routes: Array<RouteRecordRaw> = [
   {
     path: '/about',
     name: 'About',
+    meta: {
+      icon: 'Female'
+    },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.

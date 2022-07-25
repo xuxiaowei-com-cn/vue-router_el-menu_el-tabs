@@ -9,6 +9,9 @@
             <!-- 有多个（大于 1）二级菜单时，index 无意义，只要唯一就行 -->
             <el-sub-menu :index=" i + ''" v-if="childrenLength(item.children) > 1">
               <template #title>
+                <el-icon v-if="item.meta && item.meta.icon">
+                  <component :is="item.meta.icon"/>
+                </el-icon>
                 <span>{{item.name}}</span>
               </template>
               <el-menu-item v-for="children in item.children" :index="children.path" @click="menuItem">{{children.name}}</el-menu-item>
@@ -17,6 +20,9 @@
             <!-- 无二级菜单，或二级菜单的个数小于等于 1 -->
             <el-menu-item :index="menuItemPath(item)" v-if="childrenLength(item.children) <= 1" @click="menuItem">
               <template #title>
+                <el-icon v-if="item.meta && item.meta.icon">
+                  <component :is="item.meta.icon"/>
+                </el-icon>
                 <span>{{item.name}}</span>
               </template>
             </el-menu-item>
@@ -65,7 +71,6 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import { Location, Document, Expand, Fold } from '@element-plus/icons-vue'
 import { useRoute, useRouter } from 'vue-router'
 import { TabPanelName } from 'element-plus'
 import { useStore } from '../store'
