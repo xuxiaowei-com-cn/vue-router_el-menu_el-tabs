@@ -4,8 +4,8 @@ import HomeView from '../views/HomeView.vue'
 
 export const routes: Array<RouteRecordRaw> = [
   {
-    name: 'Navigator',
-    path: '/',
+    name: 'Navigator - 1',
+    path: '',
     component: Layout,
     children: [
       {
@@ -24,8 +24,8 @@ export const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
-    name: 'NavigatorView - 2',
-    path: '/',
+    name: 'Navigator - 2',
+    path: '',
     component: Layout,
     children: [
       {
@@ -35,7 +35,7 @@ export const routes: Array<RouteRecordRaw> = [
       },
       {
         path: '/Navigator_2_2',
-        name: 'NavigatorView_2_2',
+        name: 'Navigator_2_2',
         meta: {
           keepAlive: true
         },
@@ -44,9 +44,9 @@ export const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
-    name: 'NavigatorView - 3',
-    path: '/Navigator_3',
-    redirect: "Navigator_3",
+    name: 'Navigator - 3',
+    path: '',
+    component: Layout,
     children: [
       {
         path: '/Navigator_3',
