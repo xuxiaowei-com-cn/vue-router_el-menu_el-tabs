@@ -7,18 +7,18 @@
           <template v-for="(item, i) in routes">
             <!-- 有二级菜单，且二级菜单的个数大于 1 -->
             <!-- 有多个（大于 1）二级菜单时，index 无意义，只要唯一就行 -->
-            <el-sub-menu :index=" i + ''" v-if="childrenLength(item.children) > 1">
+            <el-sub-menu :index="i + ''" :key="i" v-if="childrenLength(item.children) > 1">
               <template #title>
                 <el-icon v-if="item.meta?.icon">
                   <component :is="item.meta?.icon"/>
                 </el-icon>
                 <span>{{item.name}}</span>
               </template>
-              <el-menu-item v-for="children in item.children" :index="children.path" @click="menuItem">{{children.name}}</el-menu-item>
+              <el-menu-item v-for="children in item.children" :key="children.path" :index="children.path" @click="menuItem">{{children.name}}</el-menu-item>
             </el-sub-menu>
 
             <!-- 无二级菜单，或二级菜单的个数小于等于 1 -->
-            <el-menu-item :index="menuItemPath(item)" v-if="childrenLength(item.children) <= 1" @click="menuItem">
+            <el-menu-item :index="menuItemPath(item)" :key="menuItem(item)" v-if="childrenLength(item.children) <= 1" @click="menuItem">
               <template #title>
                 <el-icon v-if="item.meta?.icon">
                   <component :is="item.meta?.icon"/>
@@ -94,7 +94,6 @@ const menuItemPath = (item: any) => {
     return item.children[0].path
   }
 }
-
 
 const store = useStore()
 
