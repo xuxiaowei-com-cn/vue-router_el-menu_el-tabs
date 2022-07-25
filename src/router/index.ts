@@ -1,9 +1,6 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../components/Layout.vue'
 import HomeView from '../views/HomeView.vue'
-import ConsoleView from '../views/ConsoleView.vue'
-import NavigatorView_2_1 from '../views/NavigatorView_2_1.vue'
-import NavigatorView_2_2 from '../views/NavigatorView_2_2.vue'
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -22,7 +19,7 @@ export const routes: Array<RouteRecordRaw> = [
         meta: {
           keepAlive: true
         },
-        component: ConsoleView
+        component: () => import('../views/ConsoleView.vue')
       }
     ]
   },
@@ -34,7 +31,7 @@ export const routes: Array<RouteRecordRaw> = [
       {
         path: '/Navigator_2_1',
         name: 'Navigator_2_1',
-        component: NavigatorView_2_1
+        component: () => import('../views/NavigatorView_2_1.vue')
       },
       {
         path: '/Navigator_2_2',
@@ -42,7 +39,7 @@ export const routes: Array<RouteRecordRaw> = [
         meta: {
           keepAlive: true
         },
-        component: NavigatorView_2_2
+        component: () => import('../views/NavigatorView_2_2.vue')
       }
     ]
   },
