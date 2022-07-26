@@ -18,7 +18,7 @@
             </el-sub-menu>
 
             <!-- 无二级菜单，或二级菜单的个数小于等于 1 -->
-            <el-menu-item :index="menuItemPath(item)" :key="menuItem(item)" v-if="childrenLength(item.children) <= 1" @click="menuItem">
+            <el-menu-item :index="menuItemPath(item)" :key="menuItemPath(item)" v-if="childrenLength(item.children) <= 1" @click="menuItem">
               <template #title>
                 <el-icon v-if="item.meta?.icon">
                   <component :is="item.meta?.icon"/>
@@ -55,7 +55,7 @@
 
           <!-- <router-view/> -->
           <router-view v-slot="{ Component }">
-            <keep-alive :exclude="store.keepAliveExclude">
+            <keep-alive :exclude="store.keepAliveExclude.value">
               <component :is="Component" :key="$route.name" v-if="$route.meta.keepAlive" />
             </keep-alive>
             <component :is="Component" :key="$route.name" v-if="!$route.meta.keepAlive" />
