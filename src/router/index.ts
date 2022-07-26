@@ -7,12 +7,13 @@ export const routes: Array<RouteRecordRaw> = [
     name: 'Navigator - 1',
     path: '',
     component: Layout,
+    redirect: 'home',
     meta: {
       icon: 'Document'
     },
     children: [
       {
-        path: '/',
+        path: '/home',
         name: 'Home',
         component: HomeView
       },

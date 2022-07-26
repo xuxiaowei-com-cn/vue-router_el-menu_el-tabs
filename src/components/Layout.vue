@@ -123,7 +123,7 @@ const editableTabsValue = ref('/')
 const editableTabs = ref([
   {
     title: 'Home',
-    name: '/',
+    name: '/home',
     // 不可关闭
     closable: false
   }
