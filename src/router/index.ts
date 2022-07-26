@@ -1,6 +1,12 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../components/Layout.vue'
 import HomeView from '../views/HomeView.vue'
+import { createPinia } from 'pinia'
+import { useStore } from '../store'
+const pinia = createPinia()
+
+const store = useStore(pinia)
+console.log(store)
 
 export const routes: Array<RouteRecordRaw> = [
   {
