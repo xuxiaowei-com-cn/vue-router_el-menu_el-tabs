@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '../components/Layout.vue'
 import HomeView from '../views/HomeView.vue'
-import { useStore } from "../store";
+import { useStore } from '../store'
 
 console.log('在路由中测试获取缓存', useStore.collapse)
 

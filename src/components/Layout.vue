@@ -180,6 +180,8 @@ const removeTab = (targetName: string) => {
       }
     })
   }
+
+  editableTabsValue.value = activeName
   editableTabs.value = tabs.filter((tab) => tab.name !== targetName)
 
   // 移除标签页时，改变URL
