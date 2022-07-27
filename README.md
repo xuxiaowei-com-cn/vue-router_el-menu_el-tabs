@@ -6,6 +6,8 @@ npm i eslint -D
 npx eslint --init
 ```
 
+# [快速体验](http://xuxiaowei-com-cn.gitee.io/vue-router_el-menu_el-tabs)
+
 # Vue 3 + TypeScript + Vite
 
 This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue
