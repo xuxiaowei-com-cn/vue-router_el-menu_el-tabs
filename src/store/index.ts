@@ -1,20 +1,9 @@
 import { ref } from 'vue'
-import { defineStore } from 'pinia'
+import { defineStore, createPinia } from 'pinia'
 
-export const useStore = defineStore({
-  id: 'store',
-  // @ts-ignore
-  persist: {
-    enabled: true,
-    strategies: [
-      {
-        key: 'xxx', // 秘钥
-        storage: localStorage // 存储方式，默认：sessionStorage，可选：localStorage
-      }
-    ]
-  },
+export const useDefineStore = defineStore('store', {
   state: () => ({
-    isCollapse: false, // 是否折叠菜单
+    isCollapse: ref<boolean>(false), // 是否折叠菜单
     keepAliveExclude: ref<string[]>([]) // keep-alive 排除页面（组件）名
   }),
   getters: {
@@ -39,7 +28,9 @@ export const useStore = defineStore({
      * @param keepAliveExclude
      */
     addKeepAliveExclude (keepAliveExclude: string) {
-      this.keepAliveExclude.push(keepAliveExclude)
+      if (this.keepAliveExclude.indexOf(keepAliveExclude) === -1) {
+        this.keepAliveExclude.push(keepAliveExclude)
+      }
     },
     /**
      * 移除 keep-alive 排除
@@ -50,3 +41,23 @@ export const useStore = defineStore({
     }
   }
 })
+
+const useStore = useDefineStore(createPinia())
+
+// 订阅缓存的修改
+useStore.$subscribe((mutation, state) => {
+  // 将缓存的修改放入本地缓存中
+  localStorage.setItem(useStore.$id, JSON.stringify({ ...state }))
+})
+
+// 获取历史缓存
+const useStoreOld = localStorage.getItem(useStore.$id)
+if (useStoreOld) {
+  // 返回已存在的缓存
+  useStore.$state = JSON.parse(useStoreOld)
+}
+
+// 注意，在使用时，不用构造方法，直接调用即可
+export {
+  useStore
+}

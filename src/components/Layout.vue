@@ -55,7 +55,7 @@
 
           <!-- <router-view/> -->
           <router-view v-slot="{ Component }">
-            <keep-alive :exclude="store.keepAliveExclude.value">
+            <keep-alive :exclude="useStore.keepAliveExclude">
               <component :is="Component" :key="$route.name" v-if="$route.meta.keepAlive" />
             </keep-alive>
             <component :is="Component" :key="$route.name" v-if="!$route.meta.keepAlive" />
@@ -95,15 +95,13 @@ const menuItemPath = (item: any) => {
   }
 }
 
-const store = useStore()
-
 // 左侧菜单是否折叠
-const isCollapse = ref(store.collapse)
+const isCollapse = ref(useStore.collapse)
 
 // 是否折叠菜单
 const isCollapseClick = () => {
   isCollapse.value = !isCollapse.value
-  store.setIsCollapse(isCollapse.value)
+  useStore.setIsCollapse(isCollapse.value)
 }
 
 // 展开指定的 sub-menu
@@ -196,7 +194,7 @@ const removeTab = (targetName: string) => {
         if (components.default) {
           // 使用 el-tabs 的 @tab-remove 删除 el-tab-pane，需要销毁
           // @ts-ignore
-          store.addKeepAliveExclude(components.default.__name)
+          useStore.addKeepAliveExclude(components.default.__name)
         }
       }
     }
