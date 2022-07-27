@@ -1,0 +1,1 @@
+import{d as e,c as o,o as a}from"./index.b8bd03db.js";const c=e({__name:"NavigatorView_3",setup(t){return console.log("NavigatorView_3.vue"),(n,r)=>(a(),o("h1",null,"NavigatorView_3"))}});export{c as default};

@@ -15,5 +15,6 @@ export default defineConfig({
     Components({
       resolvers: [ElementPlusResolver()],
     }),
-  ]
+  ],
+  base: '/vue-router_el-menu_el-tabs/'
 })
