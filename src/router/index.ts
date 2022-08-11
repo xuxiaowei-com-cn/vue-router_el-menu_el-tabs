@@ -72,6 +72,24 @@ export const routes: Array<RouteRecordRaw> = [
     ]
   },
   {
+    name: '其他',
+    path: '',
+    component: Layout,
+    meta: {
+      hide: true
+    },
+    children: [
+      {
+        path: '/refresh',
+        name: '刷新',
+        meta: {
+          hide: true
+        },
+        component: () => import('../views/RefreshView.vue')
+      }
+    ]
+  },
+  {
     path: '/about',
     name: 'About',
     meta: {
