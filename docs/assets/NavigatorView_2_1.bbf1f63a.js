@@ -1,0 +1,1 @@
+import{d as e,c as o,o as a}from"./index.dc06bbce.js";const c=e({__name:"NavigatorView_2_1",setup(t){return console.log("NavigatorView_2_1.vue"),(_,n)=>(a(),o("h1",null,"NavigatorView_2_1"))}});export{c as default};

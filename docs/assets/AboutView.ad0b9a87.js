@@ -1,0 +1,1 @@
+import{d as e,c as o,o as t,e as s}from"./index.dc06bbce.js";const a={class:"about"},n=s("h1",null,"This is an about page",-1),c=[n],l=e({__name:"AboutView",setup(_){return console.log("AboutView.vue"),(i,r)=>(t(),o("div",a,c))}});export{l as default};

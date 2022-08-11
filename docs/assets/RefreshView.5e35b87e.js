@@ -1,0 +1,1 @@
+import{d as n,i as t,E as r,b as s,a,o as c}from"./index.dc06bbce.js";const l=n({__name:"RefreshView",setup(_){return t().then(e=>{console.log(e)}),a().go(-1),(e,i)=>{const o=r;return c(),s(o)}}});export{l as default};
