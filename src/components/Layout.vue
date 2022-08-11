@@ -7,7 +7,7 @@
           <template v-for="(item, i) in routes">
             <!-- 有二级菜单，且二级菜单的个数大于 1 -->
             <!-- 有多个（大于 1）二级菜单时，index 无意义，只要唯一就行 -->
-            <el-sub-menu :index="i + ''" :key="i" v-if="childrenLength(item.children) > 1">
+            <el-sub-menu :index="i + ''" :key="i" v-if="childrenLength(item.children) > 1 && item.meta?.hide !== true">
               <template #title>
                 <el-icon v-if="item.meta?.icon">
                   <component :is="item.meta?.icon"/>
@@ -18,13 +18,13 @@
             </el-sub-menu>
 
             <!-- 无二级菜单，或二级菜单的个数小于等于 1 -->
-            <el-menu-item :index="menuItemPath(item)" :key="menuItemPath(item)" v-if="childrenLength(item.children) <= 1" @click="menuItem">
-              <template #title>
+            <el-menu-item :index="menuItemPath(item)" :key="menuItemPath(item)" v-if="childrenLength(item.children) <= 1 && item.meta?.hide !== true" @click="menuItem">
+              <el-tooltip class="box-item" effect="dark" :disabled="!isCollapse" content="item.name" placement="right">
                 <el-icon v-if="item.meta?.icon">
                   <component :is="item.meta?.icon"/>
                 </el-icon>
-                <span>{{item.name}}</span>
-              </template>
+              </el-tooltip>
+              <span>{{item.name}}</span>
             </el-menu-item>
           </template>
         </el-menu>
@@ -41,6 +41,13 @@
           <el-button v-else @click="isCollapseClick">
             <el-icon>
               <fold/>
+            </el-icon>
+          </el-button>
+
+          <!-- 刷新 -->
+          <el-button @click="refreshClick">
+            <el-icon>
+              <refresh/>
             </el-icon>
           </el-button>
 
@@ -208,6 +215,28 @@ const changeTab = (name: TabPanelName) => {
   // 切换标签页时，改变URL
   location.hash = name.toString()
 }
+
+// 刷新当前页面（局部刷新，无论如何都会销毁组件）
+const refreshClick = () => {
+  // 无论如何都会销毁组件
+  const routeRecords = router.getRoutes()
+  for (const i in routeRecords) {
+    const routeRecord = routeRecords[i]
+    if (routeRecord.path === location.hash.substring(1, location.hash.length)) {
+      const components = routeRecord.components
+      if (components) {
+        if (components.default) {
+          // 使用 el-tabs 的 @tab-remove 删除 el-tab-pane，需要销毁
+          // @ts-ignore
+          useStore.addKeepAliveExclude(components.default.__name)
+        }
+      }
+    }
+  }
+
+  location.hash = '/refresh'
+}
+
 </script>
 
 <style scoped>
