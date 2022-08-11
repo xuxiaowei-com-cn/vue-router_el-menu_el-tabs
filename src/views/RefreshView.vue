@@ -8,6 +8,12 @@
 
 import { useRouter } from 'vue-router'
 
+import { ipv4Ipify } from '../api/ipify'
+
+ipv4Ipify().then((response: string) => {
+  console.log(response)
+})
+
 const router = useRouter()
 
 // 回到上一个页面
