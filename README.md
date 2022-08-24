@@ -4,6 +4,17 @@
 npm create vite@latest vue-router_el-menu_el-tabs -- --template vue-ts
 npm i eslint -D
 npx eslint --init
+# 选择
+# To check syntax, find problems, and enforce code style
+# JavaScript modules (import/export)
+# Vue.js
+# use TypeScript
+# √ Browser
+# Use a popular style guide
+# Standard: https://github.com/standard/standard
+# JavaScript
+
+npx husky-init
 ```
 
 # [快速体验](http://xuxiaowei-com-cn.gitee.io/vue-router_el-menu_el-tabs)
