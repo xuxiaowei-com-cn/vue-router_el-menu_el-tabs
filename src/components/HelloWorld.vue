@@ -29,6 +29,9 @@ const count = ref(0)
     in your IDE for a better DX
   </p>
   <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
+
+  <div class="color-red text-60px">此行内容用于测试 unocss</div>
+
 </template>
 
 <style scoped>

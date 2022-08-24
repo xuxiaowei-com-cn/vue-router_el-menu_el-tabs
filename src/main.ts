@@ -5,6 +5,9 @@ import router from './router'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { createPinia } from 'pinia'
 
+// https://github.com/unocss/unocss/#vite
+import 'uno.css'
+
 const store = createPinia()
 
 const app = createApp(App)
